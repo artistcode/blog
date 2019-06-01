@@ -1,13 +1,11 @@
 <?php
 namespace app\admin\controller;
 
-class Index extends  Common
+class Home  extends Common
 {
-
-
     public function index()
     {
-        return view('index');
+        return view('console');
     }
 
 

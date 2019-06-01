@@ -64,3 +64,31 @@ create table bl_category
   primary key (category_id)
 ) engine = MyIsam
   default charset = utf8 comment '文章分类表';
+
+
+create table bl_authority(
+authority_id  smallint unsigned primary key auto_increment  comment '权限id',
+authority_name varchar(30) not null default '' comment '权限名称',
+authority_parent smallint unsigned  not null default  0  comment '父及权限',
+authority_description  varchar(255) not null default  '' comment '权限名称',
+authority_add_user_id   int  unsigned not null default 0  comment '添加权限用户',
+authority_modify_user_id int  unsigned not null default 0 comment  '记录最后修改用户',
+authority_addtime  datetime  not null default CURRENT_TIMESTAMP  comment  '添加时间',
+authority_modify  DATETIME  not null  default CURRENT_TIMESTAMP  comment  '最后修改权限时间'
+)engine = Myisam default charset ='utf8' comment '权限表';
+
+create  table bl_role(
+  role_id   smallint unsigned primary key  auto_increment  comment '角色id',
+  role_name  varchar(30) not null default '' comment '角色名称',
+  role_authority_id_list  varchar(100) not null default 1  comment '当前角色所拥有的权限',
+  role_description  varchar(100) not null default '' comment  '角色描述',
+  role_add_user_id  smallint  not null  comment '添加当前角色的用户',
+  role_addtime   datetime  not null  default  current_timestamp  comment '添加角色时间',
+  role_modify_user_id  smallint  unsigned  not null default 0 comment  '最后修改角色用户',
+  role_modify_time   datetime  not null default  current_timestamp  comment  '当前校色最后修改时间'
+)engine = Myisam  default charset ='utf8';
+
+
+alter table  bl_user  add  role_id  smallint not null  default 0 comment '所属角色id';
+
+
